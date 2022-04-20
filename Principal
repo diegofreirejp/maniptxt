@@ -1,0 +1,86 @@
+import java.util.Scanner;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.io.FileWriter;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.BufferedReader;
+
+public class Projetotxt {
+
+	public static void main(String args[]) throws IOException {
+
+		File arquivo = new File( "C:\\POO\\extensao.txt" );
+		Scanner resposta = new Scanner(System.in);
+		try {
+
+		Funcoes funcao = new Funcoes();
+		
+		funcao.exibirMenu();
+		int numero = resposta.nextInt();
+		resposta.nextLine();
+		
+		
+		switch(numero) {
+		case 1:
+			System.out.println("Digite o nome a ser acrescentado: ");
+			String nome = resposta.nextLine();
+			
+			funcao.adicionarNome(nome);
+			
+			
+			System.out.println("O seguinte nome foi adicionado no txt: "+ nome);
+				
+				
+			break;
+			
+		case 2:
+			FileReader fr = new FileReader(arquivo);
+			BufferedReader br = new BufferedReader(fr);
+			String linha = br.readLine();
+			System.out.println(linha);
+			
+			while(linha != null) {
+				linha = br.readLine();
+				System.out.println(linha);
+			}
+			break;
+			
+		case 3:
+			
+			System.out.println("Tem certeza que deseja excluir todo o conteúdo? 1 para Sim // 2 para Não");
+			int resp = resposta.nextInt();
+			if (resp == 1) {
+				arquivo.delete();
+				boolean existe = arquivo.exists(); // Para ver se o arquivo existe.
+				if (existe == false) {
+					arquivo.createNewFile();
+					arquivo.mkdir();
+					System.out.println("Arquivo apagado.");
+				break;
+				} else;
+					System.out.println("Volte ao menu.");
+					
+			} else
+				
+			break;
+		
+			
+		default:
+			System.out.println("Número inválido. Digite outro número.");
+			
+			break;
+		}
+		
+		} catch (IOException ex) {
+			ex.printStackTrace();
+			}
+			
+		
+		
+		resposta.close();
+		
+	}
+}
